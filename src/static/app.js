@@ -861,8 +861,24 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeRangeFilter,
   };
 
+  // Load announcement from API
+  async function loadAnnouncement() {
+    try {
+      const response = await fetch("/announcement");
+      if (!response.ok) return;
+      const data = await response.json();
+      if (data.active && data.message) {
+        document.getElementById("announcement-text").textContent = data.message;
+        document.getElementById("announcement-banner").style.display = "block";
+      }
+    } catch (error) {
+      console.error("Failed to load announcement:", error);
+    }
+  }
+
   // Initialize app
   checkAuthentication();
   initializeFilters();
   fetchActivities();
+  loadAnnouncement();
 });

@@ -869,7 +869,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.json();
       if (data.active && data.message) {
         document.getElementById("announcement-text").textContent = data.message;
-        document.getElementById("announcement-banner").style.display = "";
+        document.getElementById("announcement-banner").style.display = "block";
       }
     } catch (error) {
       console.error("Failed to load announcement:", error);
